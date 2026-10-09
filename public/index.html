@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Claude App</title>
+<link rel="manifest" href="/manifest.webmanifest" />
+<meta name="theme-color" content="#c96442" />
+<link rel="icon" href="/icon.svg" type="image/svg+xml" />
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+<div id="app">
+  <aside id="sidebar">
+    <div class="side-head">
+      <div class="brand">Claude App</div>
+      <button id="btn-add-project" class="btn ghost small">＋ 项目</button>
+    </div>
+
+    <div class="side-section">
+      <div class="side-label">项目</div>
+      <ul id="project-list" class="list"></ul>
+    </div>
+
+    <div class="side-section grow">
+      <div class="side-label">
+        <span>会话</span>
+        <button id="btn-new-session" class="btn ghost small" disabled>＋ 新会话</button>
+      </div>
+      <ul id="session-list" class="list"></ul>
+    </div>
+
+    <div class="side-foot" id="status-foot">连接中…</div>
+  </aside>
+
+  <main id="main">
+    <header id="topbar">
+      <div class="tb-left">
+        <div id="tb-project" class="tb-project">未选择项目</div>
+        <div id="tb-cwd" class="tb-cwd"></div>
+      </div>
+      <div class="tb-right">
+        <label class="field">模型
+          <input id="model-input" type="text" spellcheck="false" />
+        </label>
+        <label class="field">权限
+          <select id="perm-select"></select>
+        </label>
+      </div>
+    </header>
+
+    <div id="chat" class="chat">
+      <div id="empty" class="empty">
+        <h2>开始对话</h2>
+        <p>在左侧选一个项目，然后发消息。<br />
+        可以拖入文件，或直接 Ctrl+V 粘贴截图。</p>
+      </div>
+    </div>
+
+    <div id="composer" class="composer">
+      <div id="attachments" class="chips"></div>
+      <div id="dropzone" class="dz">
+        <textarea id="input" rows="1" placeholder="输入消息…（Enter 发送，Shift+Enter 换行）"></textarea>
+        <div class="composer-actions">
+          <button id="btn-attach" class="btn ghost" title="添加文件">附件</button>
+          <button id="btn-send" class="btn primary" disabled>发送</button>
+          <button id="btn-stop" class="btn danger hidden">停止</button>
+        </div>
+      </div>
+      <div id="hint" class="hint"></div>
+    </div>
+  </main>
+</div>
+
+<input id="file-input" type="file" multiple hidden />
+
+<dialog id="project-dialog">
+  <div class="dlg">
+    <h3>添加项目</h3>
+    <p class="dlg-sub">选一个文件夹作为工作目录（Claude 会在这里读写文件）</p>
+    <div class="br-bar">
+      <input id="br-path" type="text" spellcheck="false" />
+      <button id="br-go" class="btn ghost small" type="button">前往</button>
+    </div>
+    <ul id="br-list" class="br-list"></ul>
+    <div class="dlg-actions">
+      <button id="br-up" class="btn ghost" type="button">上一级</button>
+      <span class="spacer"></span>
+      <button id="br-cancel" class="btn ghost" type="button">取消</button>
+      <button id="br-pick" class="btn primary" type="button">选择此文件夹</button>
+    </div>
+  </div>
+</dialog>
+
+<script src="/app.js"></script>
+</body>
+</html>
